@@ -1,10 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
+metadata:
+  name: helm-app
+  namespace: argocd
 spec:
+  project: default
   sources:
-  - repoURL: 'ghcr.io/giginnovationlabs/helm/'
-    chart: endeavour-notes
-    namespace: default
+  - repoURL: 'ghcr.io/giginnovationlabs/helm'
+    chart: endeavour-notes 
     targetRevision: 2.3.0
     helm:
       valueFiles:
@@ -12,3 +15,6 @@ spec:
   - repoURL: 'https://github.com/GiGInnovationLabs/keith-test.git'
     targetRevision: master
     ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
