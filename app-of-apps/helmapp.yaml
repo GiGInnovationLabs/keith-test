@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+spec:
+  sources:
+  - repoURL: 'ghcr.io/giginnovationlabs/helm/'
+    chart: endeavour-notes
+    namespace: default
+    targetRevision: 2.3.0
+    helm:
+      valueFiles:
+      - $values/apps/dev01/notes/values.yaml
+  - repoURL: 'https://github.com/GiGInnovationLabs/keith-test.git'
+    targetRevision: master
+    ref: values
